@@ -19,4 +19,6 @@ EXPOSE 8000
 #RUN python manage.py migrate
 #RUN python manage.py makemigrations
 
+#test commit to check jenkins automation
+
 CMD ["gunicorn","-b","0.0.0.0:8000","notesapp.wsgi"]
