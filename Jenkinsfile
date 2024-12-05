@@ -41,7 +41,7 @@ pipeline{
         stage("Deploy"){
             steps{
                 echo "This is deploying the code"
-                sh "docker run -d -p 8000:8000 -it notes:latest"
+                sh "docker compose up -d"
             }
         }
     }
