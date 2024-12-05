@@ -7,7 +7,7 @@ pipeline{
             steps{
                 sh "whoami"
             clone("https://github.com/devopsguru-debug/djangoapp.git","master")
-                echo "Code is cloned"
+            echo "Code is cloned"
             }
         }
         stage("Code Build"){
