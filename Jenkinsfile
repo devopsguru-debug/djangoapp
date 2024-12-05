@@ -17,7 +17,7 @@ pipeline{
             steps{
                 script{
                     clone("https://github.com/devopsguru-debug/djangoapp.git", "master")
-                    echo "The code is cloned"
+                    
                 }
             }
         }
