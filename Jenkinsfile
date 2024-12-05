@@ -1,30 +1,47 @@
-@Library('Shared')_
-pipeline{
-    agent { label 'dev-server'}
+@Library("Shared") _
+pipeline{ 
+    
+    agent {label "newagent"}
     
     stages{
-        stage("Code clone"){
+        
+        stage("Hello"){
             steps{
-                sh "whoami"
-            clone("https://github.com/devopsguru-debug/djangoapp.git","master")
-            echo "Code is cloned"
-            }
-        }
-        stage("Code Build"){
-            steps{
-            dockerbuild("notes-app","latest")
-            }
-        }
-        stage("Push to DockerHub"){
-            steps{
-                dockerpush("dockerHubCreds","notes-app","latest")
-            }
-        }
-        stage("Deploy"){
-            steps{
-                deploy()
+                script{
+                    hello()
+                }
             }
         }
         
+        stage("Code"){
+            steps{
+                script{
+                    clone("https://github.com/devopsguru-debug/djangoapp.git", "master")
+                }
+            }
+        }
+        
+        stage("Build"){
+            steps{
+                script{
+                    docker_build("notes","latest","sahilbonami")
+                }
+            }
+        }
+        
+        stage("Push"){
+            steps{
+                script{
+                    docker_push("notes","latest","sahilbonami")
+                }
+            }
+        }
+        
+        stage("Deploy"){
+            steps{
+                echo "This is deploying the code"
+                sh "docker run -d -p 8000:8000 notes:latest"
+            }
+        }
     }
 }
